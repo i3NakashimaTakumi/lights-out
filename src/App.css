@@ -41,12 +41,19 @@ body {
 }
 
 header {
-  height: 5%;
-  padding: 10px;
+  height: 10%;
   color: white;
   background-color: #5ba4d7;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: x-large;
+}
+
+.container {
+  height: 90%;
+  width: 100%;
+  display: flex;
 }
 
 .game {
@@ -58,48 +65,4 @@ header {
 .game-board {
   aspect-ratio: 1/1;
   padding: 10% 15%;
-}
-
-.game-info {
-  text-align: center;
-  padding: 1%;
-}
-
-.game-info-button {
-  color: #5ba4d7;
-  padding: 15px 30px;
-  background-color: #fff;
-  border: solid;
-  border-color: #5ba4d7;
-  border-radius: 5px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
-}
-
-.game-info-button.current-move {
-  color: #f8d71c;
-  animation: text-round 2s infinite;
-}
-
-@keyframes text-round {
-  50% {
-    /* 待機時間 */
-    transform: rotateX(0);
-  }
-  100% {
-    transform: rotateX(360deg);
-  }
-}
-
-.game-info-button:hover {
-  color: #fff;
-  background-color: #5ba4d7;
-}
-
-.container {
-  height: 95%;
-  width: 100%;
-  display: flex;
 }

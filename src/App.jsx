@@ -15,9 +15,10 @@ function Square({ value, onSquareClick }) {
 Board.propTypes = {
   squares: PropTypes.array.isRequired,
   onPlay: PropTypes.func.isRequired,
+  counter: PropTypes.number.isRequired,
 };
 
-function Board({ squares, onPlay }) {
+function Board({ squares, onPlay, counter }) {
   function handleClick(i) {
     squares[i] === 1 ? (squares[i] = 0) : (squares[i] = 1);
 
@@ -38,7 +39,9 @@ function Board({ squares, onPlay }) {
       squares[i + 5] === 1 ? (squares[i + 5] = 0) : (squares[i + 5] = 1);
     }
 
-    onPlay([...squares]);
+    counter++;
+
+    onPlay([...squares], counter);
   }
 
   const boardRow = [];
@@ -74,17 +77,19 @@ function Board({ squares, onPlay }) {
 
 export default function Game() {
   const [history, setHistory] = useState(Array(25).fill(0));
+  const [count, setCount] = useState(0);
 
-  function handlePlay(nextSquares) {
+  function handlePlay(nextSquares, nextCount) {
     setHistory(nextSquares);
+    setCount(nextCount);
   }
 
   return (
     <div className="game">
-      <header className="status"></header>
+      <header className="status">count: {count}</header>
       <div className="container">
         <div className="game-board">
-          <Board squares={history} onPlay={handlePlay} />
+          <Board squares={history} onPlay={handlePlay} counter={count} />
         </div>
       </div>
     </div>
