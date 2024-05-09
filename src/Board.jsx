@@ -5,9 +5,10 @@ Board.propTypes = {
   squares: PropTypes.array.isRequired,
   onPlay: PropTypes.func.isRequired,
   counter: PropTypes.number.isRequired,
+  checkClear: PropTypes.func.isRequired,
 };
 
-export default function Board({ squares, onPlay, counter }) {
+export default function Board({ squares, onPlay, counter, checkClear }) {
   function handleClick(i) {
     squares[i] === 1 ? (squares[i] = 0) : (squares[i] = 1);
 
@@ -31,6 +32,8 @@ export default function Board({ squares, onPlay, counter }) {
     counter++;
 
     onPlay([...squares], counter);
+
+    checkClear(squares);
   }
 
   const boardRow = [];

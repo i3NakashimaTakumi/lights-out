@@ -8,7 +8,7 @@ Stopwatch.propTypes = {
 };
 
 export default function Stopwatch({ setTime, isRunning, setIsRunning }) {
-  const intervalRef = useRef(null);
+  const intervalRef = useRef(0);
 
   function handleStart() {
     setIsRunning(true);

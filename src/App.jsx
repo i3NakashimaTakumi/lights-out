@@ -8,6 +8,18 @@ export default function Game() {
   const [count, setCount] = useState(0);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [isClear, setClear] = useState(false);
+
+  function checkClear(squares) {
+    if (
+      squares.every((value) => {
+        return value === 1;
+      })
+    ) {
+      setIsRunning(false);
+      setClear(true);
+    }
+  }
 
   function handlePlay(nextSquares, nextCount) {
     setHistory(nextSquares);
@@ -16,24 +28,25 @@ export default function Game() {
 
   const milliseconds = `0${(time % 1000) / 10}`.slice(-2);
   const seconds = `0${Math.floor(time / 1000) % 60}`.slice(-2);
-  const minutes = `0${Math.floor(time / 60000) % 60}`.slice(-2);
-  const hours = `0${Math.floor(time / 3600000)}`.slice(-2);
+  const minutes = `0${Math.floor(time / 60000)}`.slice(-2);
 
   return (
     <div className="game">
       <header className="status">
         <div className="counter">count: {count}</div>
         <div className="timer">
-          time: {hours}:{minutes}:{seconds}:{milliseconds}
+          time: {minutes}:{seconds}:{milliseconds}
         </div>
       </header>
       <div className="game-board">
-        <Board squares={history} onPlay={handlePlay} counter={count} />
-        <Stopwatch
-          setTime={setTime}
-          isRunning={isRunning}
-          setIsRunning={setIsRunning}
-        />
+        {isClear && (
+          <div className="clear">
+            <p>Game Clear! Thank You For Playing!</p>
+            <button>Restart</button>
+          </div>
+        )}
+        <Board squares={history} onPlay={handlePlay} counter={count} checkClear={checkClear} />
+        <Stopwatch setTime={setTime} isRunning={isRunning} setIsRunning={setIsRunning} />
       </div>
     </div>
   );
