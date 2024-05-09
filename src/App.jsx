@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 import Board from "./Board";
 import Stopwatch from "./Stopwatch";
@@ -9,6 +9,7 @@ export default function Game() {
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isClear, setClear] = useState(false);
+  const intervalRef = useRef(0);
 
   function checkClear(squares) {
     if (
@@ -18,6 +19,7 @@ export default function Game() {
     ) {
       setIsRunning(false);
       setClear(true);
+      clearInterval(intervalRef.current);
     }
   }
 
@@ -46,7 +48,12 @@ export default function Game() {
           </div>
         )}
         <Board squares={history} onPlay={handlePlay} counter={count} checkClear={checkClear} />
-        <Stopwatch setTime={setTime} isRunning={isRunning} setIsRunning={setIsRunning} />
+        <Stopwatch
+          setTime={setTime}
+          isRunning={isRunning}
+          setIsRunning={setIsRunning}
+          intervalRef={intervalRef}
+        />
       </div>
     </div>
   );
