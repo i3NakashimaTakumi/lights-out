@@ -4,20 +4,21 @@ Stopwatch.propTypes = {
   setTime: PropTypes.func.isRequired,
   isRunning: PropTypes.bool.isRequired,
   setIsRunning: PropTypes.func.isRequired,
-  intervalRef: PropTypes.number.isRequired,
+  intervalRef: PropTypes.object.isRequired,
+  setHistory: PropTypes.func.isRequired,
 };
 
-export default function Stopwatch({ setTime, isRunning, setIsRunning, intervalRef }) {
+export default function Stopwatch({ setTime, isRunning, setIsRunning, intervalRef, setHistory }) {
   function handleStart() {
+    const randomHistory = [];
+    for (let index = 0; index < 25; index++) {
+      randomHistory.push(Math.floor(Math.random() * 2));
+    }
+    setHistory(randomHistory);
     setIsRunning(true);
     intervalRef.current = setInterval(() => {
       setTime((prevTime) => prevTime + 10);
     }, 10);
-  }
-
-  function handlePause() {
-    clearInterval(intervalRef.current);
-    setIsRunning(false);
   }
 
   function handleReset() {
@@ -29,11 +30,10 @@ export default function Stopwatch({ setTime, isRunning, setIsRunning, intervalRe
   return (
     <div className="stopwatch">
       {isRunning ? (
-        <button onClick={handlePause}>Pause</button>
+        <button onClick={handleReset}>Reset</button>
       ) : (
         <button onClick={handleStart}>Start</button>
       )}
-      <button onClick={handleReset}>Reset</button>
     </div>
   );
 }

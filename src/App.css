@@ -64,20 +64,19 @@ header {
 }
 
 .stopwatch {
-  display: flex;
-  flex-direction: column;
   width: 20%;
-  height: 20%
+  height: 10%
 }
 
 .stopwatch button {
-  height: 50%;
+  height: 100%;
+  width: 100%;
   border-radius: 10px;
   margin: 5%;
   color: white;
   background-color: #5ba4d7;
   border: none;
-  font-size: large;
+  font-size: x-large;
 }
 
 .stopwatch button:hover {

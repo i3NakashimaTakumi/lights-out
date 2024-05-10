@@ -6,10 +6,12 @@ Board.propTypes = {
   onPlay: PropTypes.func.isRequired,
   counter: PropTypes.number.isRequired,
   checkClear: PropTypes.func.isRequired,
+  isRunning: PropTypes.bool.isRequired,
 };
 
-export default function Board({ squares, onPlay, counter, checkClear }) {
+export default function Board({ squares, onPlay, counter, checkClear, isRunning }) {
   function handleClick(i) {
+    if (!isRunning) return;
     squares[i] === 1 ? (squares[i] = 0) : (squares[i] = 1);
 
     // 上端以外

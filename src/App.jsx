@@ -47,12 +47,19 @@ export default function Game() {
             <button>Restart</button>
           </div>
         )}
-        <Board squares={history} onPlay={handlePlay} counter={count} checkClear={checkClear} />
+        <Board
+          squares={history}
+          onPlay={handlePlay}
+          counter={count}
+          checkClear={checkClear}
+          isRunning={isRunning}
+        />
         <Stopwatch
           setTime={setTime}
           isRunning={isRunning}
           setIsRunning={setIsRunning}
           intervalRef={intervalRef}
+          setHistory={setHistory}
         />
       </div>
     </div>
