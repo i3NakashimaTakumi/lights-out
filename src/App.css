@@ -5,14 +5,38 @@ body {
 }
 
 .square {
-  background: #fff;
+  background-color: #fff;
   border: 1px solid #5ba4d7;
   float: left;
   aspect-ratio: 1/1;
+  animation: fadeOut .3s linear forwards;
 }
 
-.square.on {
-  background: #f8d71c;
+.off {
+  background-color: #fff;
+  animation: fadeOut .3s linear forwards;
+}
+
+@keyframes fadeOut{
+  0%{
+  }
+  100%{
+    background-color: #fff;
+  }
+}
+
+.on {
+  background-color: #f8d71c;
+  animation: fadeIn .3s;
+}
+
+@keyframes fadeIn{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
 }
 
 .square:hover {

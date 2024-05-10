@@ -6,6 +6,6 @@ Square.propTypes = {
 };
 
 export default function Square({ value, onSquareClick }) {
-  const className = value === 1 ? "square on" : "square";
+  const className = value === 1 ? "square on" : "square off";
   return <button className={className} onClick={onSquareClick}></button>;
 }

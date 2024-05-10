@@ -1,15 +1,14 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import "./App.css";
 import Board from "./Board";
 import Stopwatch from "./Stopwatch";
+import Header from "./ Header";
 
 export default function Game() {
   const [history, setHistory] = useState(Array(25).fill(0));
   const [count, setCount] = useState(0);
-  const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isClear, setClear] = useState(false);
-  const intervalRef = useRef(0);
 
   function checkClear(squares) {
     const isSquaresValueOne = squares.every((value) => {
@@ -17,17 +16,14 @@ export default function Game() {
     });
     if (isSquaresValueOne) {
       setIsRunning(false);
-      setClear(true);
-      clearInterval(intervalRef.current);
+
+      setTimeout(() => {
+        setClear(true);
+      }, 300);
     }
   }
 
-  function handleClick(i) {
-    if (isRunning !== true) {
-      alert("Startボタンを押してください");
-      return;
-    }
-
+  function switchSquareValue(history, i) {
     history[i] === 1 ? (history[i] = 0) : (history[i] = 1);
 
     // 上端以外
@@ -46,6 +42,15 @@ export default function Game() {
     if (i < 20) {
       history[i + 5] === 1 ? (history[i + 5] = 0) : (history[i + 5] = 1);
     }
+  }
+
+  function handleClick(i) {
+    if (isRunning !== true) {
+      alert("Startボタンを押してください");
+      return;
+    }
+
+    switchSquareValue(history, i);
 
     setHistory([...history]);
     setCount(count + 1);
@@ -54,46 +59,27 @@ export default function Game() {
   }
 
   function handleStart() {
-    const randomHistory = [];
-
-    for (let index = 0; index < 25; index++) {
-      randomHistory.push(Math.floor(Math.random() * 2));
+    for (let i = 0; i < 50; i++) {
+      switchSquareValue(history, Math.floor(Math.random() * 25));
     }
 
-    setHistory(randomHistory);
-    setIsRunning(true);
+    setHistory([...history]);
 
-    intervalRef.current = setInterval(() => {
-      setTime((prevTime) => prevTime + 10);
-    }, 10);
+    setIsRunning(true);
   }
 
   function handleReset() {
-    clearInterval(intervalRef.current);
     setIsRunning(false);
-    setTime(0);
-    setCount(0);
   }
 
   function handleReStart() {
     setHistory(Array(25).fill(0));
     setClear(false);
-    setTime(0);
-    setCount(0);
   }
-
-  const milliseconds = `0${(time % 1000) / 10}`.slice(-2);
-  const seconds = `0${Math.floor(time / 1000) % 60}`.slice(-2);
-  const minutes = `0${Math.floor(time / 60000)}`.slice(-2);
 
   return (
     <div className="game">
-      <header className="status">
-        <div className="counter">count: {count}</div>
-        <div className="timer">
-          time: {minutes}:{seconds}:{milliseconds}
-        </div>
-      </header>
+      <Header isRunning={isRunning} count={count} setCount={setCount} />
       <div className="game-board">
         {isClear && (
           <div className="clear">
