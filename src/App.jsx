@@ -13,7 +13,7 @@ export default function Game() {
   const [isClear, setClear] = useState(false);
 
   function frame() {
-    // launch a few confetti from the left edge
+    // 左から発射する紙吹雪の設定
     confetti({
       particleCount: 300,
       angle: 60,
@@ -21,7 +21,7 @@ export default function Game() {
       spread: 55,
       origin: { x: 0 },
     });
-    // and launch a few from the right edge
+    // 右から
     confetti({
       particleCount: 300,
       angle: 120,
@@ -32,22 +32,29 @@ export default function Game() {
   }
 
   function checkClear(squares) {
+    // 全てのマスが光っているか
     const isSquaresValueOne = squares.every((value) => {
       return value === 1;
     });
+
+    // 全てのマスが光っていたら
     if (isSquaresValueOne) {
+      // タイム、操作ストップ
       setIsRunning(false);
 
+      // 最後にクリックしたマスが光るアニメーションが終わってからisClear = true
       setTimeout(() => {
         setClear(true);
       }, 300);
 
+      // クリア画面が出てから紙吹雪
       setTimeout(() => {
         frame();
       }, 2000);
     }
   }
 
+  // クリックしたマスとその上下左右のマスの値を反転
   function switchSquareValue(history, i) {
     history[i] === 1 ? (history[i] = 0) : (history[i] = 1);
 
@@ -84,6 +91,7 @@ export default function Game() {
   }
 
   function handleStart() {
+    // ランダムな盤面を生成
     for (let i = 0; i < 50; i++) {
       switchSquareValue(history, Math.floor(Math.random() * 25));
     }
@@ -118,7 +126,7 @@ export default function Game() {
       <div className="game-board">
         {isClear && (
           <div className="clear">
-            <p>Game Clear! Thank You For Playing!</p>
+            <p>Congratulations! Thank You For Playing!</p>
             <button onClick={handleReStart}>ReStart</button>
           </div>
         )}

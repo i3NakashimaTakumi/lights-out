@@ -9,6 +9,7 @@ Board.propTypes = {
 export default function Board({ squares, handleClick }) {
   const boardRow = [];
 
+  // 5*5の形にSquareを生成
   for (let row = 0; row < 5; row++) {
     const squaresInRow = [];
     for (let col = 0; col < 5; col++) {

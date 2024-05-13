@@ -12,6 +12,7 @@ Header.propTypes = {
 export default function Header({ isRunning, count, setCount, time, setTime }) {
   const intervalRef = useRef(0);
 
+  // 描画に際して起こる副作用
   useEffect(() => {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
@@ -22,6 +23,7 @@ export default function Header({ isRunning, count, setCount, time, setTime }) {
     }
   }, [isRunning, setCount, setTime]);
 
+  // timeを分：秒：ミリ秒の形に
   const milliseconds = `0${(time % 1000) / 10}`.slice(-2);
   const seconds = `0${Math.floor(time / 1000) % 60}`.slice(-2);
   const minutes = `0${Math.floor(time / 60000)}`.slice(-2);
