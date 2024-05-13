@@ -7,6 +7,7 @@ import Header from "./ Header";
 export default function Game() {
   const [history, setHistory] = useState(Array(25).fill(0));
   const [count, setCount] = useState(0);
+  const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isClear, setClear] = useState(false);
 
@@ -70,16 +71,26 @@ export default function Game() {
 
   function handleReset() {
     setIsRunning(false);
+    setCount(0);
+    setTime(0);
   }
 
   function handleReStart() {
     setHistory(Array(25).fill(0));
     setClear(false);
+    setTime(0);
+    setCount(0);
   }
 
   return (
     <div className="game">
-      <Header isRunning={isRunning} count={count} setCount={setCount} />
+      <Header
+        isRunning={isRunning}
+        count={count}
+        setCount={setCount}
+        time={time}
+        setTime={setTime}
+      />
       <div className="game-board">
         {isClear && (
           <div className="clear">
