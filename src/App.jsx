@@ -1,4 +1,5 @@
 import { useState } from "react";
+import confetti from "canvas-confetti";
 import "./App.css";
 import Board from "./Board";
 import Stopwatch from "./Stopwatch";
@@ -11,6 +12,25 @@ export default function Game() {
   const [isRunning, setIsRunning] = useState(false);
   const [isClear, setClear] = useState(false);
 
+  function frame() {
+    // launch a few confetti from the left edge
+    confetti({
+      particleCount: 300,
+      angle: 60,
+      startVelocity: 60,
+      spread: 55,
+      origin: { x: 0 },
+    });
+    // and launch a few from the right edge
+    confetti({
+      particleCount: 300,
+      angle: 120,
+      startVelocity: 60,
+      spread: 55,
+      origin: { x: 1 },
+    });
+  }
+
   function checkClear(squares) {
     const isSquaresValueOne = squares.every((value) => {
       return value === 1;
@@ -21,6 +41,10 @@ export default function Game() {
       setTimeout(() => {
         setClear(true);
       }, 300);
+
+      setTimeout(() => {
+        frame();
+      }, 2000);
     }
   }
 
