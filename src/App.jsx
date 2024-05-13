@@ -2,11 +2,12 @@ import { useState } from "react";
 import confetti from "canvas-confetti";
 import "./App.css";
 import Board from "./Board";
-import Stopwatch from "./Stopwatch";
+import Menu from "./Stopwatch";
 import Header from "./ Header";
 
 export default function Game() {
-  const [history, setHistory] = useState(Array(25).fill(0));
+  const rowCount = 5;
+  const [history, setHistory] = useState(Array(rowCount * rowCount).fill(0));
   const [count, setCount] = useState(0);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
@@ -59,20 +60,20 @@ export default function Game() {
     history[i] === 1 ? (history[i] = 0) : (history[i] = 1);
 
     // 上端以外
-    if (5 <= i) {
-      history[i - 5] === 1 ? (history[i - 5] = 0) : (history[i - 5] = 1);
+    if (rowCount <= i) {
+      history[i - rowCount] === 1 ? (history[i - rowCount] = 0) : (history[i - rowCount] = 1);
     }
     // 左端以外
-    if (i % 5 !== 0) {
+    if (i % rowCount !== 0) {
       history[i - 1] === 1 ? (history[i - 1] = 0) : (history[i - 1] = 1);
     }
     // 右端以外
-    if (i % 5 !== 4) {
+    if (i % rowCount !== rowCount - 1) {
       history[i + 1] === 1 ? (history[i + 1] = 0) : (history[i + 1] = 1);
     }
     // 下端以外
-    if (i < 20) {
-      history[i + 5] === 1 ? (history[i + 5] = 0) : (history[i + 5] = 1);
+    if (i < rowCount * (rowCount - 1)) {
+      history[i + rowCount] === 1 ? (history[i + rowCount] = 0) : (history[i + rowCount] = 1);
     }
   }
 
@@ -93,7 +94,7 @@ export default function Game() {
   function handleStart() {
     // ランダムな盤面を生成
     for (let i = 0; i < 50; i++) {
-      switchSquareValue(history, Math.floor(Math.random() * 25));
+      switchSquareValue(history, Math.floor(Math.random() * rowCount * rowCount));
     }
 
     setHistory([...history]);
@@ -108,7 +109,7 @@ export default function Game() {
   }
 
   function handleReStart() {
-    setHistory(Array(25).fill(0));
+    setHistory(Array(rowCount * rowCount).fill(0));
     setClear(false);
     setTime(0);
     setCount(0);
@@ -130,8 +131,8 @@ export default function Game() {
             <button onClick={handleReStart}>ReStart</button>
           </div>
         )}
-        <Board squares={history} handleClick={handleClick} />
-        <Stopwatch isRunning={isRunning} handleStart={handleStart} handleReset={handleReset} />
+        <Board squares={history} handleClick={handleClick} rowCount={rowCount} />
+        <Menu isRunning={isRunning} handleStart={handleStart} handleReset={handleReset} />
       </div>
     </div>
   );

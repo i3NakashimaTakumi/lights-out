@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 
-Stopwatch.propTypes = {
+Menu.propTypes = {
   isRunning: PropTypes.bool.isRequired,
   handleStart: PropTypes.func.isRequired,
   handleReset: PropTypes.func.isRequired,
 };
 
-export default function Stopwatch({ isRunning, handleStart, handleReset }) {
+export default function Menu({ isRunning, handleStart, handleReset }) {
   return (
     <div className="stopwatch">
       {isRunning ? (
