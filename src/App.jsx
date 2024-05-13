@@ -2,7 +2,7 @@ import { useState } from "react";
 import confetti from "canvas-confetti";
 import "./App.css";
 import Board from "./Board";
-import Menu from "./Stopwatch";
+import Menu from "./Menu";
 import Header from "./ Header";
 
 export default function Game() {
