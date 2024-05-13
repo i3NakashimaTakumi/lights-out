@@ -6,7 +6,7 @@ import Menu from "./Menu";
 import Header from "./ Header";
 
 export default function Game() {
-  const rowCount = 5;
+  const rowCount = 2;
   const [history, setHistory] = useState(Array(rowCount * rowCount).fill(0));
   const [count, setCount] = useState(0);
   const [time, setTime] = useState(0);
@@ -79,7 +79,6 @@ export default function Game() {
 
   function handleClick(i) {
     if (isRunning !== true) {
-      alert("Startボタンを押してください");
       return;
     }
 
@@ -128,6 +127,9 @@ export default function Game() {
         {isClear && (
           <div className="clear">
             <p>Congratulations! Thank You For Playing!</p>
+            <p>
+              mode: {rowCount} × {rowCount}
+            </p>
             <button onClick={handleReStart}>ReStart</button>
           </div>
         )}

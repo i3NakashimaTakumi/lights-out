@@ -1,6 +1,5 @@
 import Square from "./Square";
 import PropTypes from "prop-types";
-import styled from "@emotion/styled";
 
 Board.propTypes = {
   squares: PropTypes.array.isRequired,
@@ -28,7 +27,13 @@ export default function Board({ squares, handleClick, rowCount }) {
     }
 
     boardRow.push(
-      <div key={row} className="board-row">
+      <div
+        key={row}
+        style={{
+          display: "flex",
+          height: `calc(100% / ${rowCount})`,
+        }}
+      >
         {squaresInRow}
       </div>
     );

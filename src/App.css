@@ -49,11 +49,6 @@ body {
   border-collapse: collapse;
 }
 
-.board-row {
-  display: flex;
-  height: calc(100% / 5);
-}
-
 header {
   height: 10%;
   width: 100%;
@@ -67,10 +62,12 @@ header {
 
 .timer {
   margin: 0 10%;
+  user-select: none;
 }
 
 .counter {
   margin: 0 10%;
+  user-select: none;
 }
 
 .game-board {
@@ -127,6 +124,7 @@ header {
   animation: rotation 2s;
   font-size: min(3rem);
   white-space: nowrap;
+  user-select: none;
 }
 
 @keyframes rotation {
