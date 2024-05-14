@@ -1,5 +1,6 @@
-import Square from "./Square";
+import Square from "../Square/Square";
 import PropTypes from "prop-types";
+import "./Board.css";
 
 Board.propTypes = {
   squares: PropTypes.array.isRequired,

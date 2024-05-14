@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import confetti from "canvas-confetti";
-import "./App.css";
-import Board from "./Board";
-import Menu from "./Menu";
-import Header from "./ Header";
 import "destyle.css/destyle.css";
+import "./App.css";
+import Board from "./Components/Board/Board";
+import Menu from "./Components/Menu/Menu";
+import Header from "./Components/Header/Header";
 
-export default function Game() {
+export default function App() {
   const [rowCount, setRowCount] = useState(5);
   const [history, setHistory] = useState(Array(rowCount * rowCount).fill(0));
   const [count, setCount] = useState(0);
@@ -85,20 +85,10 @@ export default function Game() {
     });
   }
 
-  function handleReset() {
-    setIsRunning(false);
-    setCount(0);
-    setTime(0);
-  }
-
   function selectMode(row) {
-    console.log(rowCount);
     setRowCount(row);
-    console.log(rowCount);
     handleReStart();
   }
-
-  console.log(history);
 
   function checkClear(squares) {
     // 全てのマスが光っているか
@@ -147,7 +137,12 @@ export default function Game() {
       />
       <div className="game-board">
         {isClear && (
-          <div className="clear">
+          <div
+            className="clear"
+            style={{
+              zIndex: "calc(infinity)",
+            }}
+          >
             <p>Congratulations! Thank You For Playing!</p>
             <p>
               mode: {rowCount} × {rowCount}
@@ -156,13 +151,7 @@ export default function Game() {
           </div>
         )}
         <Board squares={history} handleClick={handleClick} rowCount={rowCount} />
-        <Menu
-          isRunning={isRunning}
-          handleStart={handleStart}
-          handleReset={handleReset}
-          selectMode={selectMode}
-          rowCount={rowCount}
-        />
+        <Menu handleStart={handleStart} selectMode={selectMode} rowCount={rowCount} />
       </div>
     </div>
   );

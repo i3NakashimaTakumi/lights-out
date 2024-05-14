@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "./Square.css";
 
 Square.propTypes = {
   value: PropTypes.number,
