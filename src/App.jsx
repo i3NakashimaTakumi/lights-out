@@ -1,17 +1,69 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import confetti from "canvas-confetti";
 import "./App.css";
 import Board from "./Board";
 import Menu from "./Menu";
 import Header from "./ Header";
+import "destyle.css/destyle.css";
 
 export default function Game() {
-  const rowCount = 2;
+  const [rowCount, setRowCount] = useState(5);
   const [history, setHistory] = useState(Array(rowCount * rowCount).fill(0));
   const [count, setCount] = useState(0);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isClear, setClear] = useState(false);
+
+  // クリックしたマスとその上下左右のマスの値を反転
+  const switchSquareValue = useCallback(
+    (history, i) => {
+      history[i] === 1 ? (history[i] = 0) : (history[i] = 1);
+
+      // 上端以外
+      if (rowCount <= i) {
+        history[i - rowCount] === 1 ? (history[i - rowCount] = 0) : (history[i - rowCount] = 1);
+      }
+      // 左端以外
+      if (i % rowCount !== 0) {
+        history[i - 1] === 1 ? (history[i - 1] = 0) : (history[i - 1] = 1);
+      }
+      // 右端以外
+      if (i % rowCount !== rowCount - 1) {
+        history[i + 1] === 1 ? (history[i + 1] = 0) : (history[i + 1] = 1);
+      }
+      // 下端以外
+      if (i < rowCount * (rowCount - 1)) {
+        history[i + rowCount] === 1 ? (history[i + rowCount] = 0) : (history[i + rowCount] = 1);
+      }
+    },
+    [rowCount]
+  );
+
+  const getRandomSquares = useCallback(
+    (square) => {
+      for (let i = 0; i < 50; i++) {
+        switchSquareValue(square, Math.floor(Math.random() * rowCount * rowCount));
+      }
+      return square;
+    },
+    [rowCount, switchSquareValue]
+  );
+
+  const handleStart = useCallback(() => {
+    setIsRunning(true);
+  }, []);
+
+  const handleReStart = useCallback(() => {
+    setClear(false);
+    setTime(0);
+    setCount(0);
+  }, []);
+
+  useEffect(() => {
+    const randomSquares = getRandomSquares(Array(rowCount * rowCount).fill(0));
+    setHistory(randomSquares);
+    setIsRunning(false);
+  }, [getRandomSquares, rowCount]);
 
   function frame() {
     // 左から発射する紙吹雪の設定
@@ -31,6 +83,21 @@ export default function Game() {
       origin: { x: 1 },
     });
   }
+
+  function handleReset() {
+    setIsRunning(false);
+    setCount(0);
+    setTime(0);
+  }
+
+  function selectMode(row) {
+    console.log(rowCount);
+    setRowCount(row);
+    console.log(rowCount);
+    handleReStart();
+  }
+
+  console.log(history);
 
   function checkClear(squares) {
     // 全てのマスが光っているか
@@ -55,28 +122,6 @@ export default function Game() {
     }
   }
 
-  // クリックしたマスとその上下左右のマスの値を反転
-  function switchSquareValue(history, i) {
-    history[i] === 1 ? (history[i] = 0) : (history[i] = 1);
-
-    // 上端以外
-    if (rowCount <= i) {
-      history[i - rowCount] === 1 ? (history[i - rowCount] = 0) : (history[i - rowCount] = 1);
-    }
-    // 左端以外
-    if (i % rowCount !== 0) {
-      history[i - 1] === 1 ? (history[i - 1] = 0) : (history[i - 1] = 1);
-    }
-    // 右端以外
-    if (i % rowCount !== rowCount - 1) {
-      history[i + 1] === 1 ? (history[i + 1] = 0) : (history[i + 1] = 1);
-    }
-    // 下端以外
-    if (i < rowCount * (rowCount - 1)) {
-      history[i + rowCount] === 1 ? (history[i + rowCount] = 0) : (history[i + rowCount] = 1);
-    }
-  }
-
   function handleClick(i) {
     if (isRunning !== true) {
       return;
@@ -88,30 +133,6 @@ export default function Game() {
     setCount(count + 1);
 
     checkClear(history);
-  }
-
-  function handleStart() {
-    // ランダムな盤面を生成
-    for (let i = 0; i < 50; i++) {
-      switchSquareValue(history, Math.floor(Math.random() * rowCount * rowCount));
-    }
-
-    setHistory([...history]);
-
-    setIsRunning(true);
-  }
-
-  function handleReset() {
-    setIsRunning(false);
-    setCount(0);
-    setTime(0);
-  }
-
-  function handleReStart() {
-    setHistory(Array(rowCount * rowCount).fill(0));
-    setClear(false);
-    setTime(0);
-    setCount(0);
   }
 
   return (
@@ -134,7 +155,13 @@ export default function Game() {
           </div>
         )}
         <Board squares={history} handleClick={handleClick} rowCount={rowCount} />
-        <Menu isRunning={isRunning} handleStart={handleStart} handleReset={handleReset} />
+        <Menu
+          isRunning={isRunning}
+          handleStart={handleStart}
+          handleReset={handleReset}
+          selectMode={selectMode}
+          rowCount={rowCount}
+        />
       </div>
     </div>
   );

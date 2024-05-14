@@ -84,29 +84,55 @@ header {
   height: 100vh;
 }
 
-.stopwatch {
+.menu {
   width: 20%;
-  height: 10%
-}
-
-.stopwatch button {
   height: 100%;
-  width: 100%;
-  border-radius: 10px;
-  margin: 5%;
-  color: white;
-  background-color: #5ba4d7;
-  border: none;
-  font-size: x-large;
 }
 
-.stopwatch button:hover {
+.menu button {
+  height: 10%;
+  width: 100%;
+  margin: 5%;
+  border-radius: 10px;
+  color: #5ba4d7;
+  background-color: #fff;
+  border: 2px  solid #5ba4d7 ;
+  font-size: x-large;
+  text-align: center;
+}
+
+.menu button:hover {
+  color: #fff;
   background-color: #3d95d4;
 }
 
-.stopwatch button:active {
+.menu button:active {
   background-color: #286a99;
 }
+
+.mode-button:disabled {
+  color: #ffffff;
+  background-color: #5ba4d7;
+}
+
+ul.mode__second-level {
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+}
+
+li.mode__single ul.mode__second-level {
+  width: 100%;
+  background: #072A24;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+li.mode__single:hover ul.mode__second-level {
+  visibility: visible;
+  opacity: 1;
+}
+
 
 .clear {
   position: fixed;
@@ -145,7 +171,8 @@ header {
   background-color: white;
   color: #5ba4d7;
   border: none;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 .clear button:hover {
