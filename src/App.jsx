@@ -53,12 +53,36 @@ export default function App() {
     setIsRunning(true);
   }, []);
 
+  const checkClear = useCallback((squares) => {
+    // 全てのマスが光っているか
+    const isSquaresValueOne = squares.every((value) => {
+      return value === 1;
+    });
+
+    // 全てのマスが光っていたら
+    if (isSquaresValueOne) {
+      // タイム、操作ストップ
+      setIsRunning(false);
+
+      // 最後にクリックしたマスが光るアニメーションが終わってからisClear = true
+      setTimeout(() => {
+        setClear(true);
+      }, 300);
+
+      // クリア画面が出てから紙吹雪
+      setTimeout(() => {
+        frame();
+      }, 2000);
+    }
+  }, []);
+
   const handleReStart = useCallback(() => {
     setHistory(getRandomSquares(Array(rowCount * rowCount).fill(0)));
+    checkClear(history);
     setClear(false);
     setTime(0);
     setCount(0);
-  }, [getRandomSquares, rowCount]);
+  }, [checkClear, getRandomSquares, history, rowCount]);
 
   useEffect(() => {
     const randomSquares = getRandomSquares(Array(rowCount * rowCount).fill(0));
@@ -88,29 +112,6 @@ export default function App() {
   function selectMode(row) {
     setRowCount(row);
     handleReStart();
-  }
-
-  function checkClear(squares) {
-    // 全てのマスが光っているか
-    const isSquaresValueOne = squares.every((value) => {
-      return value === 1;
-    });
-
-    // 全てのマスが光っていたら
-    if (isSquaresValueOne) {
-      // タイム、操作ストップ
-      setIsRunning(false);
-
-      // 最後にクリックしたマスが光るアニメーションが終わってからisClear = true
-      setTimeout(() => {
-        setClear(true);
-      }, 300);
-
-      // クリア画面が出てから紙吹雪
-      setTimeout(() => {
-        frame();
-      }, 2000);
-    }
   }
 
   function handleClick(i) {
@@ -151,7 +152,7 @@ export default function App() {
           </div>
         )}
         <Board squares={history} handleClick={handleClick} rowCount={rowCount} />
-        <Menu handleStart={handleStart} selectMode={selectMode} rowCount={rowCount} />
+        <Menu handleStart={handleStart} selectMode={selectMode} />
       </div>
     </div>
   );

@@ -5,14 +5,10 @@ import { useState } from "react";
 Menu.propTypes = {
   handleStart: PropTypes.func.isRequired,
   selectMode: PropTypes.func.isRequired,
-  rowCount: PropTypes.number.isRequired,
 };
 
-export default function Menu({ handleStart, selectMode, rowCount }) {
+export default function Menu({ handleStart, selectMode }) {
   const [iconClass, setIconClass] = useState("menu-item");
-  function checkDisabled(number) {
-    return rowCount === number;
-  }
 
   return (
     <div className="menu-container">
@@ -37,29 +33,29 @@ export default function Menu({ handleStart, selectMode, rowCount }) {
             <p className="back">×</p>
           </div>
         </a>
-        <li className={iconClass} disabled={checkDisabled(2)} onClick={() => selectMode(2)}>
-          2 × 2
-        </li>
-        <li className={iconClass} disabled={checkDisabled(3)} onClick={() => selectMode(3)}>
+        <li className={iconClass} onClick={() => selectMode(3)}>
           3 × 3
         </li>
-        <li className={iconClass} disabled={checkDisabled(4)} onClick={() => selectMode(4)}>
+        <li className={iconClass} onClick={() => selectMode(4)}>
           4 × 4
         </li>
-        <li className={iconClass} disabled={checkDisabled(5)} onClick={() => selectMode(5)}>
+        <li className={iconClass} onClick={() => selectMode(5)}>
           5 × 5
         </li>
-        <li className={iconClass} disabled={checkDisabled(6)} onClick={() => selectMode(6)}>
+        <li className={iconClass} onClick={() => selectMode(6)}>
           6 × 6
         </li>
-        <li className={iconClass} disabled={checkDisabled(7)} onClick={() => selectMode(7)}>
+        <li className={iconClass} onClick={() => selectMode(7)}>
           7 × 7
         </li>
-        <li className={iconClass} disabled={checkDisabled(8)} onClick={() => selectMode(8)}>
+        <li className={iconClass} onClick={() => selectMode(8)}>
           8 × 8
         </li>
-        <li className={iconClass} disabled={checkDisabled(9)} onClick={() => selectMode(9)}>
+        <li className={iconClass} onClick={() => selectMode(9)}>
           9 × 9
+        </li>
+        <li className={iconClass} onClick={() => selectMode(10)}>
+          10 × 10
         </li>
       </ul>
     </div>
