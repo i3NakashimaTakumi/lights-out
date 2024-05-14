@@ -85,13 +85,15 @@ header {
 
 .menu {
   width: 20%;
-  height: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .menu button {
   height: 10%;
   width: 100%;
-  margin: 5% 0;
   border-radius: 10px;
   color: #5ba4d7;
   background-color: #fff;
@@ -147,7 +149,7 @@ li.mode__single:hover ul.mode__second-level {
 
 .clear p {
   animation: rotation 2s;
-  font-size: min(3rem);
+  font-size: clamp(1rem, 3vw, 10rem);
   white-space: nowrap;
   margin: 2% 0;
 }
@@ -164,14 +166,16 @@ li.mode__single:hover ul.mode__second-level {
 }
  
 .clear button {
-  height: 10%;
-  width: 10%;
+  height: 5vw;
+  width: 10vw;
+  min-height: 40px;
+  min-width: 80px;
   margin: 2% 0;
   border-radius: 10px;
   background-color: white;
   color: #5ba4d7;
   border: none;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2vw, 10rem);
   text-align: center;
 }
 
