@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
+import "./Header.css";
 
 Header.propTypes = {
   isRunning: PropTypes.bool.isRequired,
