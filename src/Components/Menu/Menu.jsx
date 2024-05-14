@@ -38,22 +38,6 @@ export default function Menu({ isRunning, handleStart, handleReset, selectMode, 
       <button className="mode-button" disabled={checkDisabled(7)} onClick={() => selectMode(7)}>
         7 × 7
       </button>
-      {/* <ul className="mode">
-        <li className="mode__single">
-          <p className="init-bottom">Select Mode</p>
-          <ul className="mode__second-level">
-            <li>
-              <a href="#">Child Menu</a>
-            </li>
-            <li>
-              <a href="#">Child Menu</a>
-            </li>
-            <li>
-              <a href="#">Child Menu</a>
-            </li>
-          </ul>
-        </li>
-      </ul> */}
     </div>
   );
 }

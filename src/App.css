@@ -5,68 +5,10 @@ body {
   user-select: none;
 }
 
-.square {
-  background-color: #fff;
-  border: 1px solid #5ba4d7;
-  float: left;
-  aspect-ratio: 1/1;
-  animation: fadeOut .3s linear forwards;
-}
-
-.off {
-  background-color: #fff;
-  animation: fadeOut .3s linear forwards;
-}
-
-@keyframes fadeOut{
-  0%{
-  }
-  100%{
-    background-color: #fff;
-  }
-}
-
-.on {
-  background-color: #f8d71c;
-  animation: fadeIn .3s;
-}
-
-@keyframes fadeIn{
-  0%{
-    opacity: 0;
-  }
-  100%{
-    opacity: 1;
-  }
-}
-
-.square:hover {
-  background-color: #c0d5e8;
-}
-
-.board {
-  aspect-ratio: 1 / 1;
-  width: 30%;
-  border-collapse: collapse;
-}
-
-header {
-  height: 10%;
-  width: 100%;
-  color: white;
-  background-color: #5ba4d7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: x-large;
-}
-
-.timer {
-  margin: 0 10%;
-}
-
-.counter {
-  margin: 0 10%;
+.game {
+  display: block;
+  width: 100vw;
+  height: 100vh;
 }
 
 .game-board {
@@ -75,45 +17,6 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-around;
-}
-
-.game {
-  display: block;
-  width: 100vw;
-  height: 100vh;
-}
-
-.menu {
-  width: 20%;
-  height: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.menu button {
-  height: 10%;
-  width: 100%;
-  border-radius: 10px;
-  color: #5ba4d7;
-  background-color: #fff;
-  border: 2px  solid #5ba4d7 ;
-  font-size: x-large;
-  text-align: center;
-}
-
-.menu button:hover {
-  color: #fff;
-  background-color: #3d95d4;
-}
-
-.menu button:active {
-  background-color: #286a99;
-}
-
-.mode-button:disabled {
-  color: #ffffff;
-  background-color: #5ba4d7;
 }
 
 .clear {

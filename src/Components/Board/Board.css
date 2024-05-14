@@ -1,0 +1,5 @@
+.board {
+  aspect-ratio: 1 / 1;
+  width: 30%;
+  border-collapse: collapse;
+}

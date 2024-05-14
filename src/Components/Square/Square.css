@@ -1,0 +1,38 @@
+.square {
+  background-color: #fff;
+  border: 1px solid #5ba4d7;
+  float: left;
+  aspect-ratio: 1/1;
+  animation: fadeOut 0.3s linear forwards;
+}
+
+.off {
+  background-color: #fff;
+  animation: fadeOut 0.3s linear forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+  }
+  100% {
+    background-color: #fff;
+  }
+}
+
+.on {
+  background-color: #f8d71c;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.square:hover {
+  background-color: #c0d5e8;
+}
