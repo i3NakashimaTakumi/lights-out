@@ -2,6 +2,7 @@ body {
   overflow: hidden;
   margin: 0;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  user-select: none;
 }
 
 .square {
@@ -62,12 +63,10 @@ header {
 
 .timer {
   margin: 0 10%;
-  user-select: none;
 }
 
 .counter {
   margin: 0 10%;
-  user-select: none;
 }
 
 .game-board {
@@ -92,7 +91,7 @@ header {
 .menu button {
   height: 10%;
   width: 100%;
-  margin: 5%;
+  margin: 5% 0;
   border-radius: 10px;
   color: #5ba4d7;
   background-color: #fff;
@@ -137,7 +136,7 @@ li.mode__single:hover ul.mode__second-level {
 .clear {
   position: fixed;
   width: 100%;
-  height: 60%;
+  height: 70%;
   background-color: #5ba4d7;
   color: white;
   display: flex;
@@ -150,7 +149,7 @@ li.mode__single:hover ul.mode__second-level {
   animation: rotation 2s;
   font-size: min(3rem);
   white-space: nowrap;
-  user-select: none;
+  margin: 2% 0;
 }
 
 @keyframes rotation {
@@ -167,6 +166,7 @@ li.mode__single:hover ul.mode__second-level {
 .clear button {
   height: 10%;
   width: 10%;
+  margin: 2% 0;
   border-radius: 10px;
   background-color: white;
   color: #5ba4d7;

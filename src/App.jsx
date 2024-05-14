@@ -54,10 +54,11 @@ export default function Game() {
   }, []);
 
   const handleReStart = useCallback(() => {
+    setHistory(getRandomSquares(Array(rowCount * rowCount).fill(0)));
     setClear(false);
     setTime(0);
     setCount(0);
-  }, []);
+  }, [getRandomSquares, rowCount]);
 
   useEffect(() => {
     const randomSquares = getRandomSquares(Array(rowCount * rowCount).fill(0));
