@@ -78,17 +78,17 @@ export default function App() {
   function frame() {
     // 左から発射する紙吹雪の設定
     confetti({
-      particleCount: 300,
+      particleCount: 400,
       angle: 60,
-      startVelocity: 60,
+      startVelocity: 80,
       spread: 55,
       origin: { x: 0 },
     });
     // 右から
     confetti({
-      particleCount: 300,
+      particleCount: 400,
       angle: 120,
-      startVelocity: 60,
+      startVelocity: 80,
       spread: 55,
       origin: { x: 1 },
     });
@@ -149,7 +149,7 @@ export default function App() {
           <div
             className="clear"
             style={{
-              zIndex: "calc(infinity)",
+              zIndex: "1",
             }}
           >
             <p>Congratulations! Thank You For Playing!</p>
