@@ -8,7 +8,7 @@ import Header from "./Components/Header/Header";
 
 export default function App() {
   const [rowCount, setRowCount] = useState(5);
-  const [history, setHistory] = useState(Array(rowCount * rowCount).fill(0));
+  const [history, setHistory] = useState(Array(rowCount * rowCount).fill(1));
   const [count, setCount] = useState(0);
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
@@ -39,12 +39,21 @@ export default function App() {
     [rowCount]
   );
 
+  // ランダムな盤面生成
   const getRandomSquares = useCallback(
-    (square) => {
+    (squares) => {
       for (let i = 0; i < 50; i++) {
-        switchSquareValue(square, Math.floor(Math.random() * rowCount * rowCount));
+        switchSquareValue(squares, Math.floor(Math.random() * rowCount * rowCount));
       }
-      return square;
+
+      const isAllOut = squares.every((value) => {
+        return value === 0;
+      });
+
+      if (isAllOut) {
+        switchSquareValue(squares, Math.floor(Math.random() * rowCount * rowCount));
+      }
+      return squares;
     },
     [rowCount, switchSquareValue]
   );
@@ -54,14 +63,14 @@ export default function App() {
   }, []);
 
   const handleReStart = useCallback(() => {
-    setHistory(getRandomSquares(Array(rowCount * rowCount).fill(0)));
+    setHistory(getRandomSquares(Array(rowCount * rowCount).fill(1)));
     setClear(false);
     setTime(0);
     setCount(0);
   }, [getRandomSquares, rowCount]);
 
   useEffect(() => {
-    const randomSquares = getRandomSquares(Array(rowCount * rowCount).fill(0));
+    const randomSquares = getRandomSquares(Array(rowCount * rowCount).fill(1));
     setHistory(randomSquares);
     setIsRunning(false);
   }, [getRandomSquares, rowCount]);
@@ -88,7 +97,7 @@ export default function App() {
   function checkClear(squares) {
     // 全てのマスが光っているか
     const isSquaresValueOne = squares.every((value) => {
-      return value === 1;
+      return value === 0;
     });
 
     // 全てのマスが光っていたら
