@@ -154,7 +154,13 @@ export default function App() {
           </div>
         )}
         <Board squares={history} handleClick={handleClick} rowCount={rowCount} />
-        <Menu handleStart={handleStart} selectMode={selectMode} rowCount={rowCount} />
+        <Menu
+          handleStart={handleStart}
+          selectMode={selectMode}
+          rowCount={rowCount}
+          isRunning={isRunning}
+          setIsRunning={setIsRunning}
+        />
       </div>
     </div>
   );

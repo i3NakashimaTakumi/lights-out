@@ -7,9 +7,11 @@ Menu.propTypes = {
   handleStart: PropTypes.func.isRequired,
   selectMode: PropTypes.func.isRequired,
   rowCount: PropTypes.number.isRequired,
+  isRunning: PropTypes.bool.isRequired,
+  setIsRunning: PropTypes.func.isRequired,
 };
 
-export default function Menu({ handleStart, selectMode, rowCount }) {
+export default function Menu({ handleStart, selectMode, rowCount, isRunning, setIsRunning }) {
   const [iconClass, setIconClass] = useState("menu-item");
 
   const menuItems = [];
@@ -29,13 +31,26 @@ export default function Menu({ handleStart, selectMode, rowCount }) {
   return (
     <div className="menu-container">
       <ul id="menu">
-        <a
-          className="menu-button icon-plus"
-          href="#menu"
-          onClick={() => setIconClass("menu-item visible")}
-        >
-          Menu
-        </a>
+        {isRunning ? (
+          <a
+            className="menu-button icon-plus disable"
+            href="#menu"
+            onClick={() => {
+              setIconClass("menu-item visible");
+              setIsRunning(false);
+            }}
+          >
+            Stop
+          </a>
+        ) : (
+          <a
+            className="menu-button icon-plus"
+            href="#menu"
+            onClick={() => setIconClass("menu-item visible")}
+          >
+            Menu
+          </a>
+        )}
         <a
           className="menu-button icon-minus"
           href="#none"

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import "./MenuItem.css";
+import { useEffect, useState } from "react";
 
 MenuItem.propTypes = {
   iconClass: PropTypes.string.isRequired,
@@ -9,6 +10,7 @@ MenuItem.propTypes = {
 };
 
 export default function MenuItem({ iconClass, selectMode, value, rowCount }) {
+  const [isDisabled, setIsDisabled] = useState(false);
   const style = `#menu:target .menu-item:nth-child(${value}) {
         transform: rotate(${(value - 3) * 45}deg) translateY(-12vw) rotate(-${(value - 3) * 45}deg);
     }`;
@@ -18,9 +20,15 @@ export default function MenuItem({ iconClass, selectMode, value, rowCount }) {
   styleSheet.innerText = style;
   document.head.appendChild(styleSheet);
 
+  useEffect(() => {
+    value === rowCount ? setIsDisabled(true) : setIsDisabled(false);
+  }, [rowCount, value]);
+
+  const className = isDisabled ? "disabled" : "able";
+
   return (
     <li style={{ style }} className={iconClass}>
-      <button disabled={value === rowCount} onClick={() => selectMode(value)}>
+      <button style={{ className }} disabled={isDisabled} onClick={() => selectMode(value)}>
         {value} × {value}
       </button>
     </li>

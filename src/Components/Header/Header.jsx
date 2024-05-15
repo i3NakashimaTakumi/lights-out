@@ -20,7 +20,6 @@ export default function Header({ isRunning, count, time, setTime }) {
       }, 10);
     } else {
       clearInterval(intervalRef.current);
-      setTime(0);
     }
   }, [isRunning, setTime]);
 

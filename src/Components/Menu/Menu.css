@@ -34,7 +34,7 @@
   background-size: 100%;
   overflow: hidden;
   z-index: -1;
-  transition: 0.5s;
+  transition: 0.1s;
   opacity: 0;
   font-size: 3vw;
 }
