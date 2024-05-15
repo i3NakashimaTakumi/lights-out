@@ -30,35 +30,3 @@
 .invisible {
   z-index: -1;
 }
-
-#menu:target .menu-item:nth-child(3) {
-  transform: rotate(0deg) translateY(-12vw) rotate(0deg);
-}
-
-#menu:target .menu-item:nth-child(4) {
-  transform: rotate(45deg) translateY(-12vw) rotate(-45deg);
-}
-
-#menu:target .menu-item:nth-child(5) {
-  transform: rotate(90deg) translateY(-12vw) rotate(-90deg);
-}
-
-#menu:target .menu-item:nth-child(6) {
-  transform: rotate(135deg) translateY(-12vw) rotate(-135deg);
-}
-
-#menu:target .menu-item:nth-child(7) {
-  transform: rotate(180deg) translateY(-12vw) rotate(-180deg);
-}
-
-#menu:target .menu-item:nth-child(8) {
-  transform: rotate(225deg) translateY(-12vw) rotate(-225deg);
-}
-
-#menu:target .menu-item:nth-child(9) {
-  transform: rotate(270deg) translateY(-12vw) rotate(-270deg);
-}
-
-#menu:target .menu-item:nth-child(10) {
-  transform: rotate(315deg) translateY(-12vw) rotate(-315deg);
-}

@@ -14,7 +14,9 @@ export default function Menu({ handleStart, selectMode }) {
   const menuItems = [];
 
   for (let index = 3; index < 11; index++) {
-    menuItems.push(<MenuItem iconClass={iconClass} selectMode={selectMode} value={index} />);
+    menuItems.push(
+      <MenuItem key={index} iconClass={iconClass} selectMode={selectMode} value={index} />
+    );
   }
 
   return (

@@ -8,8 +8,17 @@ MenuItem.propTypes = {
 };
 
 export default function MenuItem({ iconClass, selectMode, value }) {
+  const style = `#menu:target .menu-item:nth-child(${value}) {
+        transform: rotate(${(value - 3) * 45}deg) translateY(-12vw) rotate(-${(value - 3) * 45}deg);
+    }`;
+
+  // スタイル要素を生成してドキュメントのheadに追加（ページ全体に適用）
+  const styleSheet = document.createElement("style");
+  styleSheet.innerText = style;
+  document.head.appendChild(styleSheet);
+
   return (
-    <li className={iconClass} onClick={() => selectMode(value)}>
+    <li style={{ style }} className={iconClass} onClick={() => selectMode(value)}>
       {value} × {value}
     </li>
   );
