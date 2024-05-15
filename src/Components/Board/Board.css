@@ -3,3 +3,7 @@
   width: 30%;
   border-collapse: collapse;
 }
+
+.stop {
+  pointer-events: none;
+}

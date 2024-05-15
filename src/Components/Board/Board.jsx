@@ -6,9 +6,10 @@ Board.propTypes = {
   squares: PropTypes.array.isRequired,
   handleClick: PropTypes.func.isRequired,
   rowCount: PropTypes.number.isRequired,
+  isRunning: PropTypes.bool.isRequired,
 };
 
-export default function Board({ squares, handleClick, rowCount }) {
+export default function Board({ squares, handleClick, rowCount, isRunning }) {
   const boardRow = [];
 
   // 5*5の形にSquareを生成
@@ -40,9 +41,11 @@ export default function Board({ squares, handleClick, rowCount }) {
     );
   }
 
+  const className = isRunning ? "board" : "board stop";
+
   return (
     <>
-      <div className="board">{boardRow}</div>
+      <div className={className}>{boardRow}</div>
     </>
   );
 }

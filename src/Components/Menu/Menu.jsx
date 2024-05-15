@@ -59,10 +59,7 @@ export default function Menu({ handleStart, selectMode, rowCount, isRunning, set
             handleStart();
           }}
         >
-          <div className="menu-text">
-            <p>Start</p>
-            <p className="back">×</p>
-          </div>
+          <p>Start</p>
         </a>
         {menuItems}
       </ul>

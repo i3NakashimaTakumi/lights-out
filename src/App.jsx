@@ -58,22 +58,24 @@ export default function App() {
     [rowCount, switchSquareValue]
   );
 
+  const reset = useCallback(() => {
+    setHistory(getRandomSquares(Array(rowCount * rowCount).fill(1)));
+    setTime(0);
+    setCount(0);
+  }, [getRandomSquares, rowCount]);
+
   const handleStart = useCallback(() => {
     setIsRunning(true);
   }, []);
 
   const handleReStart = useCallback(() => {
-    setHistory(getRandomSquares(Array(rowCount * rowCount).fill(1)));
     setClear(false);
-    setTime(0);
-    setCount(0);
-  }, [getRandomSquares, rowCount]);
+    reset();
+  }, [reset]);
 
   useEffect(() => {
-    const randomSquares = getRandomSquares(Array(rowCount * rowCount).fill(1));
-    setHistory(randomSquares);
-    setIsRunning(false);
-  }, [getRandomSquares, rowCount]);
+    reset();
+  }, [reset]);
 
   function frame() {
     // 左から発射する紙吹雪の設定
@@ -119,7 +121,6 @@ export default function App() {
 
   function selectMode(row) {
     setRowCount(row);
-    handleReStart();
   }
 
   function handleClick(i) {
@@ -153,7 +154,12 @@ export default function App() {
             <button onClick={handleReStart}>ReStart</button>
           </div>
         )}
-        <Board squares={history} handleClick={handleClick} rowCount={rowCount} />
+        <Board
+          squares={history}
+          handleClick={handleClick}
+          rowCount={rowCount}
+          isRunning={isRunning}
+        />
         <Menu
           handleStart={handleStart}
           selectMode={selectMode}
