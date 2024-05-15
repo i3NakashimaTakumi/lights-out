@@ -160,7 +160,7 @@ export default function App() {
           </div>
         )}
         <Board squares={history} handleClick={handleClick} rowCount={rowCount} />
-        <Menu handleStart={handleStart} selectMode={selectMode} />
+        <Menu handleStart={handleStart} selectMode={selectMode} rowCount={rowCount} />
       </div>
     </div>
   );

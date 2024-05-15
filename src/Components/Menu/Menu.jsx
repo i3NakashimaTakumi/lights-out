@@ -6,16 +6,23 @@ import MenuItem from "../MenuItem/MenuItem";
 Menu.propTypes = {
   handleStart: PropTypes.func.isRequired,
   selectMode: PropTypes.func.isRequired,
+  rowCount: PropTypes.number.isRequired,
 };
 
-export default function Menu({ handleStart, selectMode }) {
+export default function Menu({ handleStart, selectMode, rowCount }) {
   const [iconClass, setIconClass] = useState("menu-item");
 
   const menuItems = [];
 
   for (let index = 3; index < 11; index++) {
     menuItems.push(
-      <MenuItem key={index} iconClass={iconClass} selectMode={selectMode} value={index} />
+      <MenuItem
+        key={index}
+        iconClass={iconClass}
+        selectMode={selectMode}
+        value={index}
+        rowCount={rowCount}
+      />
     );
   }
 
