@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import "./Menu.css";
 import { useState } from "react";
+import MenuItem from "../MenuItem/MenuItem";
 
 Menu.propTypes = {
   handleStart: PropTypes.func.isRequired,
@@ -9,6 +10,12 @@ Menu.propTypes = {
 
 export default function Menu({ handleStart, selectMode }) {
   const [iconClass, setIconClass] = useState("menu-item");
+
+  const menuItems = [];
+
+  for (let index = 3; index < 11; index++) {
+    menuItems.push(<MenuItem iconClass={iconClass} selectMode={selectMode} value={index} />);
+  }
 
   return (
     <div className="menu-container">
@@ -33,30 +40,7 @@ export default function Menu({ handleStart, selectMode }) {
             <p className="back">×</p>
           </div>
         </a>
-        <li className={iconClass} onClick={() => selectMode(3)}>
-          3 × 3
-        </li>
-        <li className={iconClass} onClick={() => selectMode(4)}>
-          4 × 4
-        </li>
-        <li className={iconClass} onClick={() => selectMode(5)}>
-          5 × 5
-        </li>
-        <li className={iconClass} onClick={() => selectMode(6)}>
-          6 × 6
-        </li>
-        <li className={iconClass} onClick={() => selectMode(7)}>
-          7 × 7
-        </li>
-        <li className={iconClass} onClick={() => selectMode(8)}>
-          8 × 8
-        </li>
-        <li className={iconClass} onClick={() => selectMode(9)}>
-          9 × 9
-        </li>
-        <li className={iconClass} onClick={() => selectMode(10)}>
-          10 × 10
-        </li>
+        {menuItems}
       </ul>
     </div>
   );
