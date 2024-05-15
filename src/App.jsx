@@ -137,13 +137,7 @@ export default function App() {
 
   return (
     <div className="game">
-      <Header
-        isRunning={isRunning}
-        count={count}
-        setCount={setCount}
-        time={time}
-        setTime={setTime}
-      />
+      <Header isRunning={isRunning} count={count} time={time} setTime={setTime} />
       <div className="game-board">
         {isClear && (
           <div

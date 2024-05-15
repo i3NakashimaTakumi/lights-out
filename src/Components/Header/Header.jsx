@@ -5,12 +5,11 @@ import "./Header.css";
 Header.propTypes = {
   isRunning: PropTypes.bool.isRequired,
   count: PropTypes.number.isRequired,
-  setCount: PropTypes.func.isRequired,
   time: PropTypes.number.isRequired,
   setTime: PropTypes.func.isRequired,
 };
 
-export default function Header({ isRunning, count, setCount, time, setTime }) {
+export default function Header({ isRunning, count, time, setTime }) {
   const intervalRef = useRef(0);
 
   // 描画に際して起こる副作用
@@ -21,8 +20,9 @@ export default function Header({ isRunning, count, setCount, time, setTime }) {
       }, 10);
     } else {
       clearInterval(intervalRef.current);
+      setTime(0);
     }
-  }, [isRunning, setCount, setTime]);
+  }, [isRunning, setTime]);
 
   // timeを分：秒：ミリ秒の形に
   const milliseconds = `0${(time % 1000) / 10}`.slice(-2);
