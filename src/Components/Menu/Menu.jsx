@@ -59,7 +59,7 @@ export default function Menu({ handleStart, selectMode, rowCount, isRunning, set
             handleStart();
           }}
         >
-          <p>Start</p>
+          Start
         </a>
         {menuItems}
       </ul>
