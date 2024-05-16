@@ -33,7 +33,7 @@ body {
 
 .clear p {
   animation: rotation 2s;
-  font-size: clamp(1rem, 3vw, 10rem);
+  font-size: clamp(1vw, 3vw, 10vw);
   white-space: nowrap;
   margin: 2% 0;
 }
@@ -41,11 +41,11 @@ body {
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
-    font-size: 10rem;
+    font-size: 10vw;
   }
   100% {
     transform: rotate(720deg);
-    font-size: 3rem;
+    font-size: 3vw;
   }
 }
  
