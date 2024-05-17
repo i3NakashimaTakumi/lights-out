@@ -42,17 +42,18 @@ export default function App() {
   // ランダムな盤面生成
   const getRandomSquares = useCallback(
     (squares) => {
-      for (let i = 0; i < 50; i++) {
-        switchSquareValue(squares, Math.floor(Math.random() * rowCount * rowCount));
+      let isAllOut = true;
+
+      while (isAllOut) {
+        for (let i = 0; i < 50; i++) {
+          switchSquareValue(squares, Math.floor(Math.random() * rowCount * rowCount));
+        }
+
+        isAllOut = squares.every((value) => {
+          return value === 0;
+        });
       }
 
-      const isAllOut = squares.every((value) => {
-        return value === 0;
-      });
-
-      if (isAllOut) {
-        switchSquareValue(squares, Math.floor(Math.random() * rowCount * rowCount));
-      }
       return squares;
     },
     [rowCount, switchSquareValue]
